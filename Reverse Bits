@@ -1,0 +1,23 @@
+### Aim  
+To reverse the bits of a given **32-bit unsigned integer** and return the resulting integer.  
+
+### Objective:
+1. Extract each bit from the given 32-bit integer and construct the reversed bit sequence.  
+2. Ensure correct binary representation by shifting and combining bits appropriately.  
+3. Optimize the solution to handle multiple function calls efficiently.  
+4. Consider edge cases, such as inputs with all bits set or only one bit set.  
+5. Return the reversed bit integer as an unsigned 32-bit value.
+
+### Code:
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t result = 0;
+        for (int i = 0; i < 32; i++) {
+            int bit = n & 1;       // AKASH_22BET10018
+            result = (result << 1) | bit; 
+            n = n >> 1;           
+        }
+        return result;
+    }
+};
