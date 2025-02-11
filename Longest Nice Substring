@@ -1,0 +1,56 @@
+### Aim: 
+To find the longest nice substring in a given string `s`, where a string is considered nice if, for every letter present, both its uppercase and lowercase versions exist in the substring.  
+
+### Objective:
+1. Understand the properties of a nice string and how to determine if a substring qualifies.  
+2. Extract and compare substrings to identify the longest nice substring.  
+3. Implement an efficient solution to ensure optimal performance for a given input length constraint (`1 <= s.length <= 100`).  
+4. Handle edge cases, such as when no nice substring exists or when multiple substrings of the same length are found.  
+5. Return the longest nice substring found in `s`, or an empty string if no valid substring exists.
+
+### Code:
+class Solution {
+public:
+    string longestNiceSubstring(string s) {
+        //AKASH_22BET10018
+        string ans;
+        for(int i=0;i<s.size()-1;i++){
+            int h=s.size();
+            int l=i;
+            string k;
+            while(h-l>0){
+                bool ansbool=true;
+                k=s.substr(l,h-l);
+                unordered_set<char> st(k.begin(),k.end());
+                for(auto val:st){
+                    int x=(int(val)-32);
+                    int y=(int(val)+32);
+                    if(int(val)>=97 && int(val)<=122){
+                        if(!(st.find(char(x))!=st.end())){
+                            ansbool=false;
+                            break;
+                        }
+                    }
+                    if(int(val)>=65 && int(val)<=90){
+                        if(!(st.find(char(y))!=st.end())){   
+                            ansbool=false;
+                            break;
+                        }
+                    }
+                }
+                if(ansbool==false){
+                    h--;
+                    k.clear();
+                    continue;
+                }
+                if(ansbool==true && ans.size()<k.size()){
+                    ans=k;
+                    k.clear();
+                    break;
+                }
+                h--;
+            }
+        }  
+        return ans;    
+    }
+};
