@@ -1,0 +1,24 @@
+### Aim:
+To count the number of set bits (1s) in the binary representation of a given positive integer.  
+
+### Objective:
+1. Convert the number into binary and count the occurrences of `1`.  
+2. Use bitwise operations to efficiently determine the number of set bits.  
+3. Optimize the function for multiple calls by utilizing bit manipulation techniques.  
+4. Handle large numbers up to `2³¹ - 1` effectively.  
+5. Implement an efficient approach, such as Brian Kernighan’s Algorithm, to reduce time complexity.
+
+### Code:
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        //AKASH_22BET10018
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n >> i) & 1) {
+                res += 1;
+            }
+        }
+        return res;        
+    }
+};
