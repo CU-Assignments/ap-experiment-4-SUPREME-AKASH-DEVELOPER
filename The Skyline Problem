@@ -1,0 +1,47 @@
+### Aim:  
+To compute the skyline formed by a set of buildings when viewed from a distance, returning the key points that define its outer contour.  
+
+### Objective:  
+- Process a list of buildings represented by [left, right, height] to extract significant changes in height.  
+- Use a sweep line algorithm combined with a max-heap (priority queue) to efficiently track active buildings.  
+- Merge redundant key points to ensure a minimal and accurate representation of the skyline.  
+- Optimize for large inputs (**1 ≤ buildings.length ≤ 10⁴**) using O(n log n) time complexity.
+
+### Code:
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        int edge_idx = 0;
+        //AKASH_22BET10018
+        vector<pair<int, int>> edges;
+        priority_queue<pair<int, int>> pq;
+        vector<vector<int>> skyline;
+
+        for (int i = 0; i < buildings.size(); ++i) {
+            const auto &b = buildings[i];
+            edges.emplace_back(b[0], i);
+            edges.emplace_back(b[1], i);
+        }
+
+        std::sort(edges.begin(), edges.end());
+
+        while (edge_idx < edges.size()) {
+            int curr_height;
+            const auto &[curr_x, _] = edges[edge_idx];
+            while (edge_idx < edges.size() &&
+                    curr_x == edges[edge_idx].first) {
+                const auto &[_, building_idx] = edges[edge_idx];
+                const auto &b = buildings[building_idx];
+                if (b[0] == curr_x)
+                    pq.emplace(b[2], b[1]);
+                ++edge_idx;
+            }
+            while (!pq.empty() && pq.top().second <= curr_x)
+                pq.pop();
+            curr_height = pq.empty() ? 0 : pq.top().first;
+            if (skyline.empty() || skyline.back()[1] != curr_height)
+                skyline.push_back({curr_x, curr_height});
+        }
+        return skyline;
+    }
+};
