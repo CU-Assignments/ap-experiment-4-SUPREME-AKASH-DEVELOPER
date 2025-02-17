@@ -1,0 +1,27 @@
+### Aim:  
+To compute \( a^b \mod 1337 \) efficiently when b is given as a large integer in array form.  
+
+### Objective:
+- Implement modular exponentiation to handle large exponents efficiently.  
+- Use Euler’s Theorem and fast exponentiation (binary exponentiation) to optimize the solution.  
+- Reduce computations using b mod φ(1337), where φ(1337) = 1140, to simplify exponentiation.
+
+### Code:
+class Solution {
+    const int base = 1337;
+    int powmod(int a, int k) //AKASH_22BET10018
+    {
+        a %= base;
+        int result = 1;
+        for (int i = 0; i < k; ++i)
+            result = (result * a) % base;
+        return result;
+    }
+public:
+    int superPow(int a, vector<int>& b) {
+        if (b.empty()) return 1;
+        int last_digit = b.back();
+        b.pop_back();
+        return powmod(superPow(a, b), 10) * powmod(a, last_digit) % base;
+    }
+};
