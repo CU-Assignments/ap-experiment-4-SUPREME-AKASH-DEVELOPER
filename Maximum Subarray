@@ -1,0 +1,33 @@
+# Maximum Subarray Problem  
+
+## Aim:  
+To find the contiguous subarray with the maximum sum in a given integer array.  
+
+## Objective:  
+- Implement an efficient algorithm to determine the subarray with the largest sum.  
+- Optimize the solution using Kadane’s Algorithm for O(n) complexity.  
+- Explore an alternative approach using Divide and Conquer.  
+
+## Code:
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        //AKASH_22BET10018
+        int maxSum = INT_MIN;
+        int currentSum = 0;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            currentSum += nums[i];
+            
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+            
+            if (currentSum < 0) {
+                currentSum = 0;
+            }
+        }
+        
+        return maxSum;
+    }
+};
