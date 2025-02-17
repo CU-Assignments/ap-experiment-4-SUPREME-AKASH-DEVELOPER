@@ -1,0 +1,26 @@
+### Aim:
+Count the number of reverse pairs \((i, j)\) in an array where \( \text{nums}[i] > 2 \times \text{nums}[j] \), using an efficient approach.  
+
+### Objectives: 
+- Implement an O(n log n) solution using Merge Sort.  
+- Count reverse pairs during the merge step.  
+- Optimize space and time complexity.  
+- Handle edge cases (large values, negatives).  
+
+### Code:
+class Solution {
+public:
+    int reversePairs(vector<int>& nums) {
+        //AKASH_22BET10018
+        int n = nums.size();
+        long long reversePairsCount = 0;
+        for(int i=0; i<n-1; i++){
+            for(int j=i+1; j<n; j++){
+                if(nums[i] > 2*(long long)nums[j]){
+                    reversePairsCount++;
+                }
+            }
+        }
+        return reversePairsCount;
+    }
+};
