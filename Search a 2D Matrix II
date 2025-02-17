@@ -1,0 +1,23 @@
+### Aim: 
+To efficiently search for a target value in a given m × n integer matrix that is sorted in both rows and columns.  
+
+### Objective:  
+- Implement an optimal search algorithm leveraging the sorted property of the matrix.  
+- Use Binary Search for an O(log(m * n)) solution in a flattened matrix.  
+- Optimize further with a Greedy Search from the top-right or bottom-left corner for an O(m + n) solution.
+
+### Code:
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        //AKASH_22BET10018
+        int m = matrix.size(), n = m ? matrix[0].size() : 0, r = 0, c = n - 1;
+        while (r < m && c >= 0) {
+            if (matrix[r][c] == target) {
+                return true;
+            }
+            matrix[r][c] > target ? c-- : r++;
+        }
+        return false;
+    }
+};
